@@ -1,10 +1,10 @@
-# SnapRoll.js
+# SnapRollJS.js
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-lightgrey)
 
-**SnapRoll.js** is a lightweight, dependency-free micro-library for creating full-screen presentations with "snap-scrolling". It allows you to configure animations for both vertical sections and horizontal slides.
+**SnapRollJS.js** is a lightweight, dependency-free micro-library for creating full-screen presentations with "snap-scrolling". It allows you to configure animations for both vertical sections and horizontal slides.
 
 [View Live Demo (Coming Soon)](#)
 
