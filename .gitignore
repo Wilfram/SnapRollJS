@@ -1,0 +1,17 @@
+node_modules/
+
+dist/
+*.log
+
+.env
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.npm/
+.eslintcache
+.cache/

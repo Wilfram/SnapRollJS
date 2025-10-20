@@ -1,0 +1,87 @@
+<head>
+  <link rel="stylesheet" href="../src/css/snaproll.css" />
+  <script src="../src/js/snaproll.js"></script>
+</head>
+<body>
+  <nav style="position: fixed; top: 20px; right: 20px; z-index: 100">
+    <ul style="list-style: none; padding: 0">
+      <li><a href="#Inicio" style="color: white">Inicio</a></li>
+      <li><a href="#Sobre-Nosotros" style="color: white">Sobre Nosotros</a></li>
+      <li><a href="#Servicios" style="color: white">Servicios</a></li>
+      <li><a href="#Contacto" style="color: white">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div
+    class="sr-cont"
+    data-snaproll
+    data-loop="true"
+    data-page-title="Mi Asombrosa Página"
+    style="background-color: black"
+  >
+    <section
+      class="sr-sec"
+      data-sr-title="Inicio"
+      data-sr-hash="Inicio"
+      style="color: white"
+    >
+      Sección 1
+    </section>
+    <section
+      class="sr-sec"
+      data-sr-title="Sobre Nosotros"
+      data-sr-hash="Sobre-Nosotros"
+      style="color: white"
+    >
+      Sección 2
+    </section>
+    <section
+      class="sr-sec"
+      data-sr-title="Servicios"
+      data-sr-hash="Servicios"
+      style="color: white"
+    >
+      <!-- El contenido principal de la sección puede ir fuera del contenedor de slides -->
+      <h1 style="position: absolute; top: 40px; z-index: 5">
+        Nuestros Servicios
+      </h1>
+
+      <!-- Contenedor obligatorio para los slides -->
+      <div class="sr-slides-cont" id="Diseño-Web">
+        <div class="sr-slide" data-sr-hash="Diseño-Web">
+          <h2>Diseño Web</h2>
+          <p>Creamos interfaces modernas y atractivas.</p>
+        </div>
+
+        <div class="sr-slide" data-sr-hash="Desarrollo-Backend">
+          <h2>Desarrollo Backend</h2>
+          <p>Sistemas robustos y escalables para tus aplicaciones.</p>
+        </div>
+
+        <div class="sr-slide" data-sr-hash="Marketing-Digital">
+          <h2>Marketing Digital</h2>
+          <p>Posicionamos tu marca en el mundo digital.</p>
+        </div>
+      </div>
+    </section>
+    <section
+      class="sr-sec"
+      data-sr-title="Contacto"
+      data-sr-hash="Contacto"
+      style="color: white"
+    >
+      Sección 4
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const miPresentacion = new SnapRoll({
+        pageTitle: "Página",
+        sectionAnimation: "zoom",
+        slideAnimation: "flip",
+        loop: true,
+      });
+    });
+  </script>
+</body>

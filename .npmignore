@@ -1,0 +1,13 @@
+node_modules/
+
+src/
+demo/
+build.js
+tsconfig.json
+
+.gitignore
+npm-debug.log
+.eslint*
+.prettier*
+.vscode/
+.idea/

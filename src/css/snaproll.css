@@ -1,0 +1,358 @@
+/* ================================
+  GLOBAL VARIABLES
+================================ */
+:root {
+  /* Timings and transitions */
+  --sr-transition-duration: 0.8s;
+
+  /* Navigation dots */
+  --sr-dot-size: 10px;
+  --sr-dot-color: rgba(255, 255, 255, 0.45);
+  --sr-dot-active: #ffffff;
+
+  /* Arrows */
+  --sr-arrow-bg: rgba(0, 0, 0, 0.3);
+  --sr-arrow-bg-hover: rgba(0, 0, 0, 0.6);
+  --sr-arrow-size: 40px;
+  --sr-arrow-color: #ffffff;
+}
+
+/* ================================
+  BASIC RESET
+================================ */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/* ================================
+  MAIN CONTAINER
+================================ */
+.sr-cont {
+  min-width: 100dvw;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+.sr-cont::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================================
+  SECTIONS (base pattern)
+================================ */
+.sr-sec {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100dvw;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  transition: all var(--sr-transition-duration) ease-in-out;
+
+  /* By default they enter from the bottom */
+  transform: translateY(100%);
+}
+
+.sr-sec.sr-active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.sr-sec.sr-prev {
+  transform: translateY(-100%);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* === Animation variants for sections === */
+.sr-anim-fade {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.sr-anim-fade.sr-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+.sr-anim-fade.sr-prev {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.sr-anim-zoom {
+  transform: translateY(100%) scale(0.8);
+  opacity: 0;
+}
+.sr-anim-zoom.sr-active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.sr-anim-zoom.sr-prev {
+  transform: translateY(-100%) scale(0.8);
+  opacity: 0;
+}
+
+.sr-anim-flip {
+  transform: translateY(100%) rotateX(90deg);
+  opacity: 0;
+}
+.sr-anim-flip.sr-active {
+  transform: translateY(0) rotateX(0);
+  opacity: 1;
+}
+.sr-anim-flip.sr-prev {
+  transform: translateY(-100%) rotateX(-90deg);
+  opacity: 0;
+}
+
+.sr-anim-skew {
+  transform: translateY(100%) skewY(10deg);
+  opacity: 0;
+}
+.sr-anim-skew.sr-active {
+  transform: translateY(0) skewY(0);
+  opacity: 1;
+}
+.sr-anim-skew.sr-prev {
+  transform: translateY(-100%) skewY(-10deg);
+  opacity: 0;
+}
+
+.sr-anim-rotate {
+  transform: translateY(100%) rotate(-10deg) scale(0.9);
+  opacity: 0;
+}
+.sr-anim-rotate.sr-active {
+  transform: translateY(0) rotate(0) scale(1);
+  opacity: 1;
+}
+.sr-anim-rotate.sr-prev {
+  transform: translateY(-100%) rotate(10deg) scale(0.9);
+  opacity: 0;
+}
+
+/* ================================
+  SLIDES (base pattern)
+================================ */
+.sr-slides-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sr-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+
+  /* By default they enter from the right */
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.sr-slide.sr-slide-active {
+  transform: translateX(0);
+  z-index: 2;
+  opacity: 1;
+}
+
+.sr-slide.sr-slide-prev {
+  transform: translateX(-100%);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* === Animation variants for slides === */
+.sr-slide-anim-fade {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.sr-slide-anim-fade.sr-slide-active {
+  transform: translateX(0);
+  opacity: 1;
+}
+.sr-slide-anim-fade.sr-slide-prev {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.sr-slide-anim-zoom {
+  transform: translateX(100%) scale(0.8);
+  opacity: 0;
+}
+.sr-slide-anim-zoom.sr-slide-active {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+.sr-slide-anim-zoom.sr-slide-prev {
+  transform: translateX(-100%) scale(0.8);
+  opacity: 0;
+}
+
+.sr-slide-anim-flip {
+  transform: translateX(100%) rotateY(90deg);
+  opacity: 0;
+}
+.sr-slide-anim-flip.sr-slide-active {
+  transform: translateX(0) rotateY(0);
+  opacity: 1;
+}
+.sr-slide-anim-flip.sr-slide-prev {
+  transform: translateX(-100%) rotateY(-90deg);
+  opacity: 0;
+}
+
+.sr-slide-anim-skew {
+  transform: translateX(100%) skewX(10deg);
+  opacity: 0;
+}
+.sr-slide-anim-skew.sr-slide-active {
+  transform: translateX(0) skewX(0);
+  opacity: 1;
+}
+.sr-slide-anim-skew.sr-slide-prev {
+  transform: translateX(-100%) skewX(-10deg);
+  opacity: 0;
+}
+
+.sr-slide-anim-rotate {
+  transform: translateX(100%) rotate(10deg) scale(0.9);
+  opacity: 0;
+}
+.sr-slide-anim-rotate.sr-slide-active {
+  transform: translateX(0) rotate(0) scale(1);
+  opacity: 1;
+}
+.sr-slide-anim-rotate.sr-slide-prev {
+  transform: translateX(-100%) rotate(-10deg) scale(0.9);
+  opacity: 0;
+}
+
+/* =========================
+  ARROWS
+========================= */
+.sr-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: var(--sr-arrow-bg);
+  color: var(--sr-arrow-color);
+  width: var(--sr-arrow-size);
+  height: var(--sr-arrow-size);
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(1rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.sr-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sr-arrow-left {
+  left: clamp(8px, 5vw, 60px);
+}
+.sr-arrow-right {
+  right: clamp(8px, 5vw, 60px);
+}
+.sr-arrow-left::after {
+  content: "‹";
+  height: 100%;
+}
+.sr-arrow-right::after {
+  content: "›";
+  height: 100%;
+}
+
+.sr-arrow.sr-arrow-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+  SLIDE DOTS
+========================= */
+.sr-slide-dots {
+  position: absolute;
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sr-slide-dots-top {
+  top: 20px;
+}
+.sr-slide-dots-bottom {
+  bottom: 20px;
+}
+
+.sr-slide-dots li {
+  margin: 0 5px;
+}
+
+.sr-slide-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.sr-slide-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.sr-slide-dot.sr-slide-dot-active {
+  background-color: #ffffff;
+  transform: scale(1.4);
+}
+
+/* ================================
+  ACCESSIBILITY
+================================ */
+@media (prefers-reduced-motion: reduce) {
+  .sr-sec,
+  .sr-slide {
+    transition: none !important;
+  }
+}
