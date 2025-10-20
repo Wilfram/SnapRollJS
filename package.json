@@ -1,12 +1,12 @@
 {
-  "name": "snaproll",
+  "name": "snaprolljs",
   "version": "2.0.0",
   "description": "A lightweight, zero-dependency Vanilla JS library for full-page snap scrolling. It provides vertical sections and horizontal slides with advanced Deep Linking.",
-  "main": "dist/snaproll.js",
-  "module": "dist/snaproll.js",
-  "browser": "dist/snaproll.min.js",
-  "style": "dist/snaproll.css",
-  "typings": "dist/snaproll.d.ts",
+  "main": "dist/snaprolljs.js",
+  "module": "dist/snaprolljs.js",
+  "browser": "dist/snaprolljs.min.js",
+  "style": "dist/snaprolljs.css",
+  "typings": "dist/snaprolljs.d.ts",
   "files": [
     "dist",
     "src/*.css",
@@ -25,13 +25,13 @@
   ],
   "license": "MIT",
   "author": "Wil",
-  "homepage": "https://github.com/Wilfram/SnapRoll#readme",
+  "homepage": "https://github.com/Wilfram/SnapRollJS#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wilfram/SnapRoll.git"
+    "url": "git+https://github.com/Wilfram/SnapRollJS.git"
   },
   "bugs": {
-    "url": "https://github.com/Wilfram/SnapRoll/issues"
+    "url": "https://github.com/Wilfram/SnapRollJS/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
