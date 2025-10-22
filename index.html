@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnapRoll.js - Documentación Interactiva</title>
+
+    <!-- 1. Carga los estilos de SnapRoll.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.css"
+    />
+
+    <!-- Estilos personalizados para la documentación -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
+
+      :root {
+        --bg-light: #f8fafc;
+        --bg-dark: #0f172a;
+        --text-light: #f8fafc;
+        --text-dark: #0f172a;
+        --text-muted: #64748b;
+        --accent-primary: #3b82f6;
+        --accent-secondary: #818cf8;
+        --border-light: #e2e8f0;
+        --border-dark: #1e293b;
+      }
+
+      /* Scrollbar personalizado */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--border-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-secondary);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        overflow: hidden; /* Requerido por SnapRoll */
+        color: var(--text-dark);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Estilos generales para el contenido de la documentación */
+      .sr-sec {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2.5rem;
+        box-sizing: border-box;
+      }
+      .doc-content {
+        max-width: 960px;
+        width: 100%;
+        min-width: 90%;
+        text-align: left;
+        padding: 20px;
+        overflow: auto;
+      }
+
+      /* Títulos y texto */
+      .doc-content h1,
+      .doc-content h2,
+      .doc-content h3 {
+        font-weight: 700;
+      }
+      .doc-content h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 900;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+        line-height: 1.1;
+      }
+      .doc-content h1 .highlight {
+        background: linear-gradient(
+          90deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .doc-content h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 2.5rem;
+        border-bottom: 2px solid var(--border-light);
+        padding-bottom: 1rem;
+      }
+      .doc-content p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+      }
+      .intro-text {
+        font-size: 1.25rem;
+        max-width: 650px;
+        margin: 1.5rem auto 0 auto;
+      }
+      .scroll-hint {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--text-muted);
+        animation: bounce 2.5s infinite;
+        font-weight: 500;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translate(-50%, 0);
+        }
+        40% {
+          transform: translate(-50%, -20px);
+        }
+        60% {
+          transform: translate(-50%, -10px);
+        }
+      }
+
+      /* Bloques de código */
+      pre {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        padding: 20px;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border-dark);
+        overflow-x: hidden;
+        text-align: left;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        text-wrap: auto;
+      }
+      code {
+        font-family: "SF Mono", "Courier New", Courier, monospace;
+      }
+      .inline-code {
+        background-color: #eef2ff;
+        color: #4338ca;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+
+      /* Tablas */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        font-size: 0.95rem;
+      }
+      th,
+      td {
+        border: 1px solid var(--border-light);
+        padding: 1rem;
+        text-align: left;
+      }
+      th {
+        background-color: var(--bg-light);
+        font-weight: 600;
+      }
+      td:first-child {
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      /* Listas de Características */
+      .feature-list {
+        display: flex;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .feature-card {
+        background: #fff;
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: left;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 380px;
+      }
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+      }
+      .feature-card .icon {
+        background: linear-gradient(
+          45deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        color: white;
+        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+      .feature-card h3 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem 0;
+      }
+      .feature-card p {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      /* Estilos específicos de secciones */
+      #s-intro {
+        background-color: #fff;
+        background-image: radial-gradient(var(--bg-light) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      #s-features,
+      #s-config,
+      #s-api {
+        background-color: var(--bg-light);
+      }
+      #s-install,
+      #s-html {
+        background-color: #fff;
+      }
+
+      #s-final {
+        background: var(--bg-dark);
+        color: var(--text-light);
+      }
+      #s-final h1 {
+        color: var(--text-light);
+      }
+      #s-final p {
+        color: #94a3b8;
+      }
+      #s-final .highlight {
+        background: linear-gradient(
+          90deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      #s-final a {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.8rem 1.8rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        background: var(--accent-primary);
+        color: var(--text-light);
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+      #s-final a:hover {
+        transform: scale(1.05);
+        background: var(--accent-secondary);
+      }
+
+      /* Anulación de estilos de SnapRoll para que coincidan con el tema */
+      .sr-dots.sr-dots-left .sr-dot {
+        width: 10px;
+        height: 10px;
+        background-color: var(--border-light);
+        transition: all 0.3s ease;
+      }
+      .sr-dots.sr-dots-left .sr-dot.sr-dot-active {
+        background-color: var(--accent-primary);
+        transform: scale(1.3);
+      }
+      .sr-arrow {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .sr-arrow:hover {
+        background-color: #fff;
+      }
+
+      @media (max-width: 920px) {
+        .feature-card {
+          max-width: 300px;
+        }
+      }
+
+      @media (max-width: 752px) {
+        .feature-card {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        #s-features.sr-sec.sr-active {
+          overflow: auto;
+          max-height: 100%;
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Contenedor principal con configuración vía data-attributes -->
+    <div
+      class="sr-cont"
+      data-snaproll
+      data-page-title="SnapRoll.js Docs"
+      data-pagination-position="left"
+    >
+      <!-- Sección 1: Introducción -->
+      <section
+        id="s-intro"
+        class="sr-sec"
+        data-sr-hash="Intro"
+        data-sr-title="Introducción"
+      >
+        <div class="doc-content" style="text-align: center">
+          <h1>
+            Crea Presentaciones Web <br />
+            con <span class="highlight">SnapRoll.js</span>
+          </h1>
+          <p class="intro-text">
+            Una librería ligera y sin dependencias para construir experiencias
+            inmersivas a pantalla completa con scroll de tipo "snap".
+          </p>
+          <div class="scroll-hint">↓</div>
+        </div>
+      </section>
+
+      <!-- Sección 2: Características -->
+      <section
+        id="s-features"
+        class="sr-sec"
+        data-sr-hash="Caracteristicas"
+        data-sr-title="Características"
+      >
+        <div class="doc-content">
+          <h2>Potente y Sencillo</h2>
+          <ul class="feature-list">
+            <li class="feature-card">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                  ></path>
+                </svg>
+              </div>
+              <h3>Cero Dependencias</h3>
+              <p>Escrito en JavaScript puro (Vanilla JS). Ligero y rápido.</p>
+            </li>
+            <li class="feature-card">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </div>
+              <h3>Secciones y Slides</h3>
+              <p>
+                Soporta scroll vertical y slides horizontales dentro de cada
+                sección.
+              </p>
+            </li>
+            <li class="feature-card">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+                  ></path>
+                </svg>
+              </div>
+              <h3>Altamente Configurable</h3>
+              <p>
+                Personaliza animaciones, selectores y comportamiento vía JS o
+                HTML.
+              </p>
+            </li>
+            <li class="feature-card">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"
+                  ></path>
+                  <path
+                    d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"
+                  ></path>
+                </svg>
+              </div>
+              <h3>Enrutamiento por Hash</h3>
+              <p>
+                Genera URLs únicas para cada sección y slide, ideal para
+                compartir.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Sección 3: Instalación y Uso -->
+      <section
+        id="s-install"
+        class="sr-sec"
+        data-sr-hash="Instalacion"
+        data-sr-title="Instalación"
+      >
+        <div class="sr-slides-cont">
+          <div class="sr-slide" data-sr-hash="Paso1-CSS-JS">
+            <div class="doc-content">
+              <h2>Empezar es Fácil</h2>
+              <h3>Paso 1: Incluye los archivos CDN</h3>
+              <p>
+                La forma más sencilla es vincular el CSS y el JS desde un CDN en
+                tu archivo HTML.
+              </p>
+              <pre><code>&lt;!-- En tu &lt;head&gt; --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.css" /&gt;
+
+&lt;!-- Antes de cerrar tu &lt;body&gt; --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          <div class="sr-slide" data-sr-hash="Paso2-HTML">
+            <div class="doc-content">
+              <h2>Empezar es Fácil</h2>
+              <h3>Paso 2: Estructura tu HTML</h3>
+              <p>
+                Crea un contenedor principal (con la clase
+                <span class="inline-code">.sr-cont</span>) y dentro, tus
+                secciones (con la clase
+                <span class="inline-code">.sr-sec</span>).
+              </p>
+              <pre><code>&lt;div class="sr-cont"&gt;
+  &lt;section class="sr-sec"&gt;Sección 1&lt;/section&gt;
+  &lt;section class="sr-sec"&gt;Sección 2&lt;/section&gt;
+  &lt;section class="sr-sec"&gt;Sección 3&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          <div class="sr-slide" data-sr-hash="Paso3-Init">
+            <div class="doc-content">
+              <h2>Empezar es Fácil</h2>
+              <h3>Paso 3: Activa SnapRoll</h3>
+              <p>
+                Añade el atributo
+                <span class="inline-code">data-snaproll</span> a tu contenedor
+                para la inicialización automática. ¡Y listo!
+              </p>
+              <pre><code>&lt;div class="sr-cont" data-snaproll&gt;
+  ...
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección 4: Configuración -->
+      <section
+        id="s-config"
+        class="sr-sec"
+        data-sr-hash="Configuracion"
+        data-sr-title="Configuración"
+      >
+        <div class="doc-content">
+          <h2>Opciones de Configuración</h2>
+          <p>
+            Personaliza tu presentación con estas opciones, ya sea en el objeto
+            JS o con atributos <span class="inline-code">data-*</span>. Desliza
+            para ver más.
+          </p>
+          <div class="sr-slides-cont">
+            <div class="sr-slide" data-sr-hash="Opciones-Generales">
+              <h3>Opciones Generales</h3>
+              <table>
+                <tr>
+                  <td><code>container</code></td>
+                  <td><code>'.sr-cont'</code></td>
+                  <td>Selector del contenedor principal.</td>
+                </tr>
+                <tr>
+                  <td><code>loop</code></td>
+                  <td><code>false</code></td>
+                  <td>Navegación infinita entre secciones.</td>
+                </tr>
+                <tr>
+                  <td><code>keyboard</code></td>
+                  <td><code>true</code></td>
+                  <td>Habilita navegación por teclado.</td>
+                </tr>
+                <tr>
+                  <td><code>sectionAnimation</code></td>
+                  <td><code>'slide'</code></td>
+                  <td>Animación ('slide', 'fade', 'zoom', etc.).</td>
+                </tr>
+              </table>
+            </div>
+            <div class="sr-slide" data-sr-hash="Opciones-Paginacion">
+              <h3>Opciones de Paginación</h3>
+              <table>
+                <tr>
+                  <td><code>pagination</code></td>
+                  <td><code>true</code></td>
+                  <td>Muestra los puntos de navegación de sección.</td>
+                </tr>
+                <tr>
+                  <td><code>paginationPosition</code></td>
+                  <td><code>'right'</code></td>
+                  <td>
+                    Posición de los puntos ('right', 'left', 'top', 'bottom').
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>slideArrows</code></td>
+                  <td><code>true</code></td>
+                  <td>Muestra flechas en secciones con slides.</td>
+                </tr>
+                <tr>
+                  <td><code>slidePagination</code></td>
+                  <td><code>true</code></td>
+                  <td>Muestra los puntos de navegación para slides.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección 5: Estructura HTML -->
+      <section
+        id="s-html"
+        class="sr-sec"
+        data-sr-hash="HTML"
+        data-sr-title="Estructura HTML"
+      >
+        <div class="doc-content">
+          <h2>Estructura HTML Avanzada</h2>
+          <p>
+            Usa atributos <span class="inline-code">data-sr-*</span> para
+            configurar hashes, títulos y animaciones por sección o slide.
+          </p>
+          <pre><code>&lt;div class="sr-cont" data-snaproll data-section-animation="zoom"&gt;
+
+  &lt;!-- Configuración a nivel de sección --&gt;
+  &lt;section class="sr-sec" 
+           data-sr-hash="Inicio" 
+           data-sr-title="Página Principal"&gt;
+    ...
+  &lt;/section&gt;
+
+  &lt;section class="sr-sec" data-sr-hash="Servicios" data-sr-slide-animation="flip"&gt;
+    &lt;!-- Contenedor para slides horizontales --&gt;
+    &lt;div class="sr-slides-cont"&gt;
+      &lt;div class="sr-slide" data-sr-hash="Diseño"&gt;Slide 1&lt;/div&gt;
+      &lt;div class="sr-slide" data-sr-hash="Desarrollo"&gt;Slide 2&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Sección 6: API -->
+      <section id="s-api" class="sr-sec" data-sr-hash="API" data-sr-title="API">
+        <div class="doc-content">
+          <h2>API Pública</h2>
+          <p>
+            Controla la navegación mediante programación. Primero, obtén la
+            instancia:
+          </p>
+          <pre><code>// La instancia se puede encontrar en el elemento del contenedor
+const miContenedor = document.querySelector('.sr-cont');
+const miPresentacion = miContenedor.__snaproll_instance;
+
+// Ahora puedes usar los métodos
+miPresentacion.next();</code></pre>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Método</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>next()</code></td>
+                <td>Navega al siguiente slide o sección.</td>
+              </tr>
+              <tr>
+                <td><code>prev()</code></td>
+                <td>Navega al slide o sección anterior.</td>
+              </tr>
+              <tr>
+                <td><code>goToSection(index)</code></td>
+                <td>Va a una sección específica por su índice.</td>
+              </tr>
+              <tr>
+                <td><code>goToSlide(index)</code></td>
+                <td>Va a un slide específico en la sección actual.</td>
+              </tr>
+              <tr>
+                <td><code>refresh()</code></td>
+                <td>Reinicializa (útil para contenido dinámico).</td>
+              </tr>
+              <tr>
+                <td><code>destroy()</code></td>
+                <td>Elimina la instancia y todos los listeners.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección 7: Final -->
+      <section
+        id="s-final"
+        class="sr-sec"
+        data-sr-hash="Final"
+        data-sr-title="¡Listo!"
+      >
+        <div class="doc-content" style="text-align: center">
+          <h1>¡Estás listo para <span class="highlight">crear</span>!</h1>
+          <p>
+            Ahora tienes todo lo necesario para construir sitios web y
+            presentaciones increíbles con SnapRoll.js.
+          </p>
+          <a
+            href="https://github.com/your-repo/snaprolljs"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Ver en GitHub</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <!-- 3. Carga el script de SnapRoll.js -->
+    <script src="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.js"></script>
+  </body>
+</html>
