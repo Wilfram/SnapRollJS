@@ -55,7 +55,8 @@ body {
   z-index: -1;
 
   transition: transform var(--sr-transition-duration) ease-in-out,
-    opacity var(--sr-transition-duration) ease-in-out;
+    opacity var(--sr-transition-duration) ease-in-out,
+    z-index var(--sr-transition-duration) ease-in-out;
 
   /* By default they enter from the bottom */
   transform: translateY(100%);
