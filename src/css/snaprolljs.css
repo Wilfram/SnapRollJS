@@ -46,16 +46,16 @@ body {
   min-width: 100dvw;
   min-height: 100dvh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  overflow: auto;
+  max-height: 100dvh;
+  display: block;
 
   opacity: 0;
   pointer-events: none;
   z-index: -1;
 
-  transition: all var(--sr-transition-duration) ease-in-out;
+  transition: transform var(--sr-transition-duration) ease-in-out,
+    opacity var(--sr-transition-duration) ease-in-out;
 
   /* By default they enter from the bottom */
   transform: translateY(100%);
