@@ -1,6 +1,6 @@
 # SnapRollJS.js
 
-![Version](https://img.shields.io/badge/version-2.0.4-blue)
+![npm version](https://img.shields.io/npm/v/snaprolljs.svg)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-lightgrey)
 
@@ -34,9 +34,9 @@ The easiest way to get started is by using the CDN links. Simply add the CSS to 
     <!-- 1. Add SnapRoll -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.css"
+      href="https://cdn.jsdelivr.net/npm/snaprolljs@2/dist/snaprolljs.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/snaprolljs/dist/snaprolljs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/snaprolljs@2/dist/snaprolljs.min.js"></script>
   </head>
   <body>
     <!-- 2. Structure your content -->
