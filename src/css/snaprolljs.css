@@ -48,7 +48,6 @@ body {
 
   overflow: auto;
   max-height: 100dvh;
-  display: block;
 
   opacity: 0;
   pointer-events: none;

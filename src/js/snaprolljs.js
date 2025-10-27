@@ -1,7 +1,7 @@
 /**
  * @file snaproll.js
  * @author [Wil]
- * @version 2.0.4
+ * @version 2.0.5
  * @description A lightweight, dependency-free library for creating full-page, snap-scrolling presentations with configurable animations for vertical sections and horizontal slides.
  */
 
