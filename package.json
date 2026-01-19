@@ -1,6 +1,6 @@
 {
   "name": "snaprolljs",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A lightweight, zero-dependency Vanilla JS library for full-page snap scrolling. It provides vertical sections and horizontal slides with advanced Deep Linking.",
   "main": "dist/snaprolljs.js",
   "module": "dist/snaprolljs.js",
